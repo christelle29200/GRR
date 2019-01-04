@@ -79,7 +79,10 @@ class Email{
 				'X-Mailer: PHP/' . phpversion();
 
 			//mail($A, $sujet, utf8_decode(utf8_encode($message)), $headers);
-            mail(str_replace(";",",",$A), $sujet, utf8_decode(utf8_encode(str_replace("<br>","",$message))), $headers); //YN selon Rapace sur le forum
+            //mail(str_replace(";",",",$A), $sujet, utf8_decode(utf8_encode(str_replace("<br>","",$message))), $headers); //YN selon Rapace sur le forum
+		
+			// Resout les problèmes d'accents dans le sujet
+			mail($A, '=?utf-8?B?'.base64_encode($sujet).'?=', utf8_decode(utf8_encode($message)), $headers);
 		}
 
 	}
